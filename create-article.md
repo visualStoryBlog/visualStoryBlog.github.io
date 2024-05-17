@@ -1,4 +1,3 @@
-Markdown
 ---
 layout: page
 title: Create a New Article
@@ -6,8 +5,17 @@ permalink: /create-article/
 ---
 
 <form id="articleForm">
-    </form>
+  <input type="text" id="mainTopicTitle" placeholder="Main Topic Title" required>
+  <input type="file" id="mainTopicImage" accept="image/*" required>
+  <textarea id="mainTopicContent" placeholder="Main Topic Content" required></textarea>
+  <div id="subtopics"></div>
+  <button type="button" id="addSubtopic">Add Subtopic</button>
+  <input type="url" id="internalLink" placeholder="Internal Link (Optional)">
+  <input type="url" id="externalLink" placeholder="External Link (Optional)">
+  <button type="submit">Publish Article</button>
+</form>
 
 <script>
-  // ... (JavaScript code for form handling and validation)
+  // ... (JavaScript code for form handling, validation, and subtopic fields)
 </script>
+
