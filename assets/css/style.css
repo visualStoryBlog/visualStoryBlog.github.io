@@ -2,8 +2,8 @@
 body {
     font-family: sans-serif;
     line-height: 1.6;
-    margin: 10;
-    padding: 5;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
     color: #333;
 }
@@ -66,80 +66,3 @@ h1, h2 {
 .below-minimum {
     color: red;
 }
-
-/* Add more styles as needed */
-.container {
-    display: grid;
-    grid-template-columns: 3fr 1fr; /* Adjust column widths as you like */
-    gap: 20px;
-}
-/* Container (Main Layout) */
-.container {
-    display: grid;
-    grid-template-columns: 1fr;   /* Single column on small screens */
-    gap: 20px;
-    max-width: 960px;             /* Limit the overall container width */
-    margin: 20px auto;
-    padding: 20px;                
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Content Area */
-.content {
-    grid-column: 1;
-    order: 1;       /* Content first in source order */
-}
-
-/* Sidebar */
-.sidebar {
-    grid-column: 1;
-    order: 2;        /* Sidebar second in source order */
-    background-color: #f8f9fa;  /* Light background for sidebar */
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.sidebar h3 {
-    margin-top: 0;
-}
-
-/* Responsive Layout */
-@media (min-width: 768px) { 
-    .container {
-        grid-template-columns: 3fr 1fr;  /* Two columns on larger screens */
-    }
-    
-    .content {
-        grid-column: 1;
-    }
-
-    .sidebar {
-        grid-column: 2;
-    }
-}
-
-
-/* Additional Styles */
-.featured-articles article {
-    border-bottom: 1px solid #eee; /* Divider between articles */
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-}
-
-.recent-articles article h3 {
-    margin-bottom: 5px;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar a {
-    color: #007bff; /* Blue link color */
-    text-decoration: none;
-}
-
-
