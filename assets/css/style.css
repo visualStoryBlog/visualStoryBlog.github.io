@@ -1,0 +1,68 @@
+/* General Styling */
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#app {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+/* Form Styling */
+#articleForm {
+    display: flex;
+    flex-direction: column; /* Arrange elements vertically */
+}
+
+#articleForm input[type="text"],
+#articleForm input[type="url"],
+#articleForm textarea {
+    padding: 10px;
+    margin: 8px 0; /* Adjust margin as needed */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+/* Subtopic Styling */
+.subtopic {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+/* Visual Story Styling */
+.visual-story-slider {
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+.visual-story-slider .slide { 
+    text-align: center; /* Center text within slides */
+}
+
+.visual-story-slider img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.word-count {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.below-minimum {
+    color: red;
+}
