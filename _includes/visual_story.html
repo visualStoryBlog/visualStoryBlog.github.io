@@ -1,0 +1,9 @@
+<div class="visual-story-slider">
+  {% assign slides = include.article.visual_story %}
+  {% for slide in slides %}
+    <div class="slide">
+      <img src="{{ slide.image }}" alt="{{ slide.title }}">
+      <h2>{{ slide.title }}</h2>
+    </div>
+  {% endfor %}
+</div>
