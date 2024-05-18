@@ -1,9 +1,14 @@
+---
+layout: page
+title: Create a New Article
+permalink: /create-article/
+---
+
 <form id="articleForm">
   <input type="text" id="mainTopicTitle" placeholder="Main Topic Title" required>
-  <div class="image-upload">
-    <label for="mainTopicImage">Main Topic Image:</label>
-    <input type="file" id="mainTopicImage" accept="image/*" required>
-  </div>
+  <input type="text" id="mainTopicImagePrompt" placeholder="Main Topic Image Prompt" required>
+  <button type="button" id="generateMainImage">Generate Main Image</button>
+  <div id="mainTopicImagePreview"></div>
   <textarea id="mainTopicContent" placeholder="Main Topic Content" required></textarea>
 
   <div id="subtopics"></div>
@@ -14,8 +19,15 @@
   <input type="url" id="externalLink" placeholder="External Link (Optional)">
 
   <button type="submit">Publish Article</button>
-
-  <input type="text" id="mainTopicImagePrompt" placeholder="Main Topic Image Prompt" required>
-<div id="mainTopicImagePreview"></div> <button type="button" onclick="generateImageWithIdeogram(document.getElementById('mainTopicImagePrompt').value, 0)">Generate Main Image</button>
-
 </form>
+
+<div id="markdown-container">
+  <pre id="markdown-content"></pre>
+  <button id="copy-button">Copy Markdown</button>
+</div>
+
+<script>
+  // ... (JavaScript code for form handling, validation, and subtopic fields)
+</script>
+
+
