@@ -14,4 +14,8 @@
   <input type="url" id="externalLink" placeholder="External Link (Optional)">
 
   <button type="submit">Publish Article</button>
+
+  <input type="text" id="mainTopicImagePrompt" placeholder="Main Topic Image Prompt" required>
+<div id="mainTopicImagePreview"></div> <button type="button" onclick="generateImageWithIdeogram(document.getElementById('mainTopicImagePrompt').value, 0)">Generate Main Image</button>
+
 </form>
