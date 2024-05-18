@@ -1,3 +1,4 @@
+Markdown
 ---
 layout: page
 title: Create a New Article
@@ -18,4 +19,3 @@ permalink: /create-article/
 <script>
   // ... (JavaScript code for form handling, validation, and subtopic fields)
 </script>
-
