@@ -119,4 +119,22 @@ h1, h2 {
     .subtopic {
         padding: 15px; /* Reduce padding in subtopic sections */
     }
+
+    /* Image Preview Styling */
+#mainTopicImagePreview,
+.subtopic-image-preview {
+    border: 1px dashed #ccc; /* Dotted border to indicate an image placeholder */
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center; /* Center the image or loading message */
+}
+
+#mainTopicImagePreview img,
+.subtopic-image-preview img {
+    max-width: 100%;   /* Make the image responsive */
+    height: auto;       /* Maintain aspect ratio */
+    display: block;     /* Prevent extra space below image */
+    margin: 0 auto;     /* Center the image horizontally */
+}
+
 }
