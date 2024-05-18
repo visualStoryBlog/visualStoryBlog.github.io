@@ -1,21 +1,20 @@
 /* General Styling */
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif; 
+    font-family: "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    background-color: #f8f8f8; /* Slightly off-white background */
     color: #333;
 }
 
 /* Container (Main Layout) */
 #app {
-    max-width: 960px; /* Limit width for larger screens */
-    margin: 20px auto;
+    margin: 20px auto; /* Adjusted margin for better spacing on mobile */
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; 
+    border-radius: 8px;
 }
 
 h1, h2 {
@@ -32,10 +31,10 @@ h1, h2 {
 #articleForm input[type="text"],
 #articleForm input[type="url"],
 #articleForm textarea {
-    width: 100%;   /* Make input fields take up full available width */
+    width: 100%; 
     padding: 15px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd; 
     border-radius: 5px; 
     box-sizing: border-box;
     font-size: 16px;
@@ -50,14 +49,14 @@ h1, h2 {
 #articleForm button,
 #addSubtopic {
     padding: 12px 24px;
-    background-color: #007bff;
+    background-color: #007bff; 
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    margin-bottom: 10px; /* Add margin to the bottom of buttons */
+    margin-bottom: 10px; 
 }
 
 #articleForm button:hover,
@@ -102,11 +101,11 @@ h1, h2 {
     color: red;
 }
 
+
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
     #app {
-        max-width: 95%; /* Take up most of the screen width on smaller devices */
-        padding: 10px; /* Reduce padding on smaller screens */
+        padding: 10px; /* Reduce padding for smaller screens */
     }
 
     #articleForm input[type="text"],
@@ -115,5 +114,9 @@ h1, h2 {
     #articleForm button,
     #addSubtopic {
         font-size: 14px; /* Slightly smaller font on smaller screens */
+    }
+
+    .subtopic {
+        padding: 15px; /* Reduce padding in subtopic sections */
     }
 }
