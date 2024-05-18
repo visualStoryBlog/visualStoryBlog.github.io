@@ -1,30 +1,24 @@
-// ... (addSubtopicField, attachWordCountValidation, validateForm functions remain the same)
+// ... (addSubtopicField, attachWordCountValidation, validateForm functions remain the same) ...
 
-// Form submission (Generate and display Markdown)
+// Form submission (Generate Markdown and redirect to new "published" page)
 document.getElementById('articleForm').addEventListener('submit', (event) => {
     event.preventDefault();
-    const articleData = {
-        mainTopicTitle: document.getElementById('mainTopicTitle').value,
-        mainTopicImage: document.getElementById('mainTopicImage').files[0].name, // Get filename
-        mainTopicContent: document.getElementById('mainTopicContent').value,
-        subtopics: [],
-        internalLink: document.getElementById('internalLink').value,
-        externalLink: document.getElementById('externalLink').value,
-    };
 
-    const subtopicElements = document.querySelectorAll('.subtopic');
-    subtopicElements.forEach(subtopicElement => {
-        articleData.subtopics.push({
-            title: subtopicElement.querySelector('.subtopicTitle').value,
-            image: subtopicElement.querySelector('.subtopicImage').files[0].name,
-            content: subtopicElement.querySelector('.subtopicContent').value,
-        });
-    });
+    // Gather article data (same as before)
+    // ...
 
+    // Generate Markdown
     const articleMarkdown = generateMarkdown(articleData);
 
-    // Store Markdown in sessionStorage for access on confirmation page
+    // Create a filename based on the title and date
+    const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
+    const filename = `${date}-${articleData.mainTopicTitle.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}.md`;
+
+    // Store Markdown in sessionStorage 
     sessionStorage.setItem('articleMarkdown', articleMarkdown);
-    // Redirect to confirmation page
-    window.location.href = '/article-published.html';
+    sessionStorage.setItem('articleFilename', filename);
+
+    // Redirect to the "published" page, using the filename as the path
+    window.location.href = `/${filename}`;
 });
+
