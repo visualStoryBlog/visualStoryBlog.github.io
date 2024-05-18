@@ -83,4 +83,36 @@ date: ${new Date().toISOString().slice(0, 10)}
     });
 
     return markdown;
+
+  // ... (addSubtopicField, attachWordCountValidation, validateForm functions remain the same)
+
+async function generateImageWithIdeogram(prompt, subtopicIndex) {
+    const imageContainer = document.getElementById(`subtopicImagePreview${subtopicIndex}`);
+
+    try {
+        // Display a loading indicator (optional)
+        imageContainer.innerHTML = '<p>Generating image...</p>';
+
+        const response = await fetch('/.netlify/functions/generate-image', {
+            method: 'POST',
+            body: JSON.stringify({ prompt }),
+        });
+
+        const data = await response.json();
+        const imageUrl = data.imageUrl;
+
+        const imagePreview = document.createElement('img');
+        imagePreview.src = imageUrl;
+        imagePreview.alt = `Generated image for subtopic ${subtopicIndex + 1}`;
+
+        imageContainer.innerHTML = ''; // Clear loading indicator
+        imageContainer.appendChild(imagePreview);
+    } catch (error) {
+        console.error('Error generating image with Ideogram:', error);
+        imageContainer.innerHTML = '<p>Error generating image. Please try again.</p>';
+    }
+}
+
+// ... (Rest of the script.js code for form submission and markdown generation) ...
+  
 }
