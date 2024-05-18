@@ -113,6 +113,35 @@ async function generateImageWithIdeogram(prompt, subtopicIndex) {
     }
 }
 
-// ... (Rest of the script.js code for form submission and markdown generation) ...
+async function generateImageWithIdeogram(prompt, subtopicIndex) {
+  const imageContainer = document.getElementById(`subtopicImagePreview${subtopicIndex}`);
+
+  try {
+    imageContainer.innerHTML = '<p>Generating image...</p>'; // Loading indicator
+
+    const image_path = await builder(prompt, {
+        output_dir: 'assets/images/', // Save images to your assets folder
+    })
+
+    const imagePreview = document.createElement('img');
+    imagePreview.src = `/assets/images/${image_path}`; // Update path
+    imagePreview.alt = `Generated image for subtopic ${subtopicIndex + 1}`;
+
+    imageContainer.innerHTML = ''; 
+    imageContainer.appendChild(imagePreview);
+    updateMarkdown(); // Update Markdown after image generation
+  } catch (error) {
+    console.error('Error generating image with Ideogram:', error);
+    imageContainer.innerHTML = '<p>Error generating image. Please try again.</p>';
+  }
+}
+function updateMarkdown() {
+  const articleData = {
+    // ... (gather data as before, including image paths from the imagePreview elements)
+  };
+  const articleMarkdown = generateMarkdown(articleData);
+  document.getElementById('markdown-content').textContent = articleMarkdown;
+}
+
   
 }
