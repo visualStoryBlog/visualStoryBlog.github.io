@@ -1,0 +1,33 @@
+---
+layout: page
+title: Article Published
+---
+
+<h2>Congratulations! Your article has been created.</h2>
+
+<p>Here is the Markdown you can copy and paste into a file in your `_posts` directory, following the correct naming convention (YYYY-MM-DD-title.md):</p>
+
+<div id="markdown-container">
+  <pre id="markdown-content"></pre>
+  <button id="copy-button">Copy Markdown</button>
+</div>
+
+<p>Would you like to create another article? <a href="/create-article">Yes</a></p>
+
+<script>
+  // Retrieve Markdown from sessionStorage
+  const articleMarkdown = sessionStorage.getItem('articleMarkdown');
+  document.getElementById('markdown-content').textContent = articleMarkdown;
+  
+//copy markdown function
+  const copyButton = document.getElementById('copy-button');
+  copyButton.addEventListener('click', () => {
+    const textArea = document.createElement('textarea');
+    textArea.value = articleMarkdown;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    alert('Markdown copied to clipboard!');
+  });
+</script>
