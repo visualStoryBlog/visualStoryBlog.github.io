@@ -1,0 +1,4 @@
+// Inside generateMarkdown function
+markdown += `![Main Topic Image]({{site.baseurl}}/assets/images/${articleData.mainTopicImage})\n\n`;
+// ... (for subtopics)
+markdown += `![Subtopic Image]({{site.baseurl}}/assets/images/${subtopic.image})\n\n`;
