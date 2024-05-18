@@ -1,24 +1,86 @@
-// ... (addSubtopicField, attachWordCountValidation, validateForm functions remain the same) ...
+// Function to add a new subtopic field
+function addSubtopicField() {
+  // ... (same as in the previous response)
+}
 
-// Form submission (Generate Markdown and redirect to new "published" page)
+// Function to attach word count validation to a textarea
+function attachWordCountValidation(textArea) {
+  // ... (same as in the previous response)
+}
+
+// Initial subtopic field
+addSubtopicField();
+
+// Handle adding new subtopics
+document.getElementById('addSubtopic').addEventListener('click', addSubtopicField);
+
+// Form validation
+function validateForm() {
+  // ... (same as in the previous response)
+}
+
+// Form submission (Generate and display Markdown)
 document.getElementById('articleForm').addEventListener('submit', (event) => {
     event.preventDefault();
+    const articleData = {
+        mainTopicTitle: document.getElementById('mainTopicTitle').value,
+        mainTopicImage: document.getElementById('mainTopicImage').files[0].name, // Get filename
+        mainTopicContent: document.getElementById('mainTopicContent').value,
+        subtopics: [],
+        internalLink: document.getElementById('internalLink').value,
+        externalLink: document.getElementById('externalLink').value,
+    };
 
-    // Gather article data (same as before)
-    // ...
+    const subtopicElements = document.querySelectorAll('.subtopic');
+    subtopicElements.forEach(subtopicElement => {
+        articleData.subtopics.push({
+            title: subtopicElement.querySelector('.subtopicTitle').value,
+            image: subtopicElement.querySelector('.subtopicImage').files[0].name,
+            content: subtopicElement.querySelector('.subtopicContent').value,
+        });
+    });
 
-    // Generate Markdown
     const articleMarkdown = generateMarkdown(articleData);
 
-    // Create a filename based on the title and date
-    const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
-    const filename = `${date}-${articleData.mainTopicTitle.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}.md`;
-
-    // Store Markdown in sessionStorage 
+    // Store Markdown in sessionStorage for access on confirmation page
     sessionStorage.setItem('articleMarkdown', articleMarkdown);
-    sessionStorage.setItem('articleFilename', filename);
-
-    // Redirect to the "published" page, using the filename as the path
-    window.location.href = `/${filename}`;
+    // Redirect to confirmation page
+    window.location.href = '/article-published.html'; 
 });
+function generateMarkdown(articleData) {
+    let markdown = `---
+layout: article
+title: ${articleData.mainTopicTitle}
+date: ${new Date().toISOString().slice(0, 10)}
+---
 
+`;
+// Add Main Topic Image to the Markdown
+    markdown += `![Main Topic Image]({{site.baseurl}}/assets/images/${articleData.mainTopicImage})\n\n`;
+// Add Main Topic Content to the Markdown
+    markdown += `${articleData.mainTopicContent}\n\n`;
+
+    if (articleData.internalLink) {
+        markdown += `[Internal Link](${articleData.internalLink})\n\n`;
+    }
+
+    if (articleData.externalLink) {
+        markdown += `[External Link](${articleData.externalLink})\n\n`;
+    }
+
+    // Add Visual Story to the Markdown (Optional)
+    markdown += `visual_story:\n`;
+    articleData.subtopics.forEach(subtopic => {
+        markdown += `  - title: ${subtopic.title}\n`;
+        markdown += `    image: {{site.baseurl}}/assets/images/${subtopic.image}\n`;
+    });
+    markdown += `\n`;
+
+    articleData.subtopics.forEach(subtopic => {
+        markdown += `## ${subtopic.title}\n\n`;
+        markdown += `![Subtopic Image]({{site.baseurl}}/assets/images/${subtopic.image})\n\n`;
+        markdown += `${subtopic.content}\n\n`;
+    });
+
+    return markdown;
+}
