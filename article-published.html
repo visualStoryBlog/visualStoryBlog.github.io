@@ -1,33 +1,50 @@
 ---
 layout: page
-title: Article Published
 ---
 
-<h2>Congratulations! Your article has been created.</h2>
+<h2>Your article is now published!</h2>
 
-<p>Here is the Markdown you can copy and paste into a file in your `_posts` directory, following the correct naming convention (YYYY-MM-DD-title.md):</p>
+<p>Here's how your article looks:</p>
 
-<div id="markdown-container">
-  <pre id="markdown-content"></pre>
-  <button id="copy-button">Copy Markdown</button>
-</div>
+<article class="blog-post">
+  <header>
+    <h1>{{ page.title }}</h1>
+    <p class="post-date">Published: {{ page.date | date: "%B %d, %Y" }}</p>
+  </header>
 
-<p>Would you like to create another article? <a href="/create-article">Yes</a></p>
+  {% if page.visual_story %}
+    <div class="visual-story-container">
+      {% include visual_story.html article=page %}
+    </div>
+  {% endif %}
+
+  <div class="article-content">
+    {{ content }}
+  </div>
+
+  <footer>
+    <div class="article-links">
+      {% if page.internal_link %}
+        <a href="{{ page.internal_link }}" class="internal-link">Read more about this topic</a>
+      {% endif %}
+      {% if page.external_link %}
+        <a href="{{ page.external_link }}" class="external-link">Explore related content</a>
+      {% endif %}
+    </div>
+  </footer>
+</article>
+
 
 <script>
-  // Retrieve Markdown from sessionStorage
+  // Retrieve Markdown from sessionStorage and populate the page
   const articleMarkdown = sessionStorage.getItem('articleMarkdown');
-  document.getElementById('markdown-content').textContent = articleMarkdown;
+
+  const pageTitle = sessionStorage.getItem('articleFilename');
+  document.title = pageTitle.slice(11).replace(/-/g, ' ');
   
-//copy markdown function
-  const copyButton = document.getElementById('copy-button');
-  copyButton.addEventListener('click', () => {
-    const textArea = document.createElement('textarea');
-    textArea.value = articleMarkdown;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
-    alert('Markdown copied to clipboard!');
-  });
+  document.querySelector('.article-content').innerHTML = marked.parse(articleMarkdown);
+
+  // Clear sessionStorage after displaying
+  sessionStorage.removeItem('articleMarkdown');
+  sessionStorage.removeItem('articleFilename');
 </script>
