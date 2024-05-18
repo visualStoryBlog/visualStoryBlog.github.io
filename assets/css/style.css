@@ -1,68 +1,119 @@
 /* General Styling */
 body {
-    font-family: sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif; 
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f8f8f8;
     color: #333;
 }
 
+/* Container (Main Layout) */
 #app {
-    max-width: 960px;
+    max-width: 960px; /* Limit width for larger screens */
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; 
 }
 
 h1, h2 {
     text-align: center;
+    margin-bottom: 20px;
 }
-/* Form Styling */
+
+/* Article Creation Form */
 #articleForm {
     display: flex;
-    flex-direction: column; /* Arrange elements vertically */
+    flex-direction: column;
 }
 
 #articleForm input[type="text"],
 #articleForm input[type="url"],
 #articleForm textarea {
-    padding: 10px;
-    margin: 8px 0; /* Adjust margin as needed */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%;   /* Make input fields take up full available width */
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px; 
+    box-sizing: border-box;
+    font-size: 16px;
 }
+
+#articleForm textarea {
+    height: 200px; 
+    resize: vertical;
+}
+
+/* Buttons */
+#articleForm button,
+#addSubtopic {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px; /* Add margin to the bottom of buttons */
+}
+
+#articleForm button:hover,
+#addSubtopic:hover {
+    background-color: #0056b3; 
+}
+
+#articleForm button:disabled {
+    background-color: #ccc;
+    cursor: default;
+}
+
 /* Subtopic Styling */
 .subtopic {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-/* Visual Story Styling */
-.visual-story-slider {
-    width: 100%; 
+    border: 1px solid #ddd;
+    padding: 20px;
     margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9; 
 }
 
-.visual-story-slider .slide { 
-    text-align: center; /* Center text within slides */
-}
-
-.visual-story-slider img {
-    max-width: 100%;
-    height: auto;
-}
-
-
-.word-count {
+.subtopic .remove-subtopic {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     font-size: 12px;
-    margin-top: 5px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-.below-minimum {
+/* Word Count */
+.word-count {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.word-count.below-minimum {
     color: red;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) { 
+    #app {
+        max-width: 95%; /* Take up most of the screen width on smaller devices */
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    #articleForm input[type="text"],
+    #articleForm input[type="url"],
+    #articleForm textarea,
+    #articleForm button,
+    #addSubtopic {
+        font-size: 14px; /* Slightly smaller font on smaller screens */
+    }
 }
