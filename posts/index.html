@@ -5,7 +5,7 @@ layout: null
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Posts | {{ site.title }}</title>
+  <title>About | {{ site.title }}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
@@ -21,15 +21,8 @@ layout: null
     </nav>
   </header>
   <main>
-    <h1>Posts</h1>
-    <ul>
-      {% for post in site.posts %}
-        <li>
-          <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-          <p>{{ post.excerpt }}</p>
-        </li>
-      {% endfor %}
-    </ul>
+    <h1>About</h1>
+    <p>This is the about page.</p>
   </main>
 </body>
 </html>
