@@ -1,67 +1,139 @@
 ---
-layout: page
-title: Welcome to My Blog
+layout: null
 ---
+
+<!DOCTYPE html>
+<html>
 <head>
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <script defer src="{{ '/assets/js/script.js' | relative_url }}"></script>
+  <title>{{ site.title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .visual-story {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .visual-story-item {
+      margin: 10px;
+      width: calc(33.33% - 20px);
+    }
+    .visual-story-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .visual-story-item h3 {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
+<body>
+  <h1>{{ site.title }}</h1>
+  <form id="blog-post-form">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title"><br><br>
+    <label for="subheadings">Subheadings:</label>
+    <ul id="subheadings-list">
+      <li>
+        <input type="text" id="subheading-1" name="subheading-1">
+        <label for="image-1">Image:</label>
+        <input type="file" id="image-1" name="image-1">
+      </li>
+      <li>
+        <input type="text" id="subheading-2" name="subheading-2">
+        <label for="image-2">Image:</label>
+        <input type="file" id="image-2" name="image-2">
+      </li>
+      <li>
+        <input type="text" id="subheading-3" name="subheading-3">
+        <label for="image-3">Image:</label>
+        <input type="file" id="image-3" name="image-3">
+      </li>
+    </ul>
+    <button type="button" id="add-subheading-btn">Add Subheading</button>
+    <br><br>
+    <label for="intro">Intro (100-200 words):</label>
+    <textarea id="intro" name="intro"></textarea><br><br>
+    <label for="conclusion">Conclusion (100-200 words):</label>
+    <textarea id="conclusion" name="conclusion"></textarea><br><br>
+    <button type="submit">Submit</button>
+  </form>
 
-<header>
-    <h1>{{ site.title }}</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/create-article">Create Article</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+  <div id="visual-story-container"></div>
 
-<div class="container">
-    <main class="content">
+  <script src="https://cdn.jsdelivr.net/npm/ideogram-wrapper@1.1.1/dist/ideogram-wrapper.min.js"></script>
+  <script>
+    const apiKey = "zPhMQms3thyBjnQnph7jxMBUSau1KlrRKjHOpeOfwkKtT0NXzADh0L8D";
+    const ideogramWrapper = new IdeogramWrapper(apiKey);
 
-        <h2>Featured Articles</h2>
-        <div class="featured-articles">
-            {% for post in site.posts limit:2 %}
-            <article>
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                <p>{{ post.excerpt }}</p>
-            </article>
-            {% endfor %}
-        </div>
+    document.getElementById("add-subheading-btn").addEventListener("click", () => {
+      const newSubheading = document.createElement("li");
+      newSubheading.innerHTML = `
+        <input type="text" id="subheading-${document.getElementById("subheadings-list").childElementCount + 1}" name="subheading-${document.getElementById("subheadings-list").childElementCount + 1}">
+        <label for="image-${document.getElementById("subheadings-list").childElementCount + 1}">Image:</label>
+        <input type="file" id="image-${document.getElementById("subheadings-list").childElementCount + 1}" name="image-${document.getElementById("subheadings-list").childElementCount + 1}">
+      `;
+      document.getElementById("subheadings-list").appendChild(newSubheading);
+    });
 
-        <h2>Recent Articles</h2>
-        <div class="recent-articles">
-            {% for post in site.posts offset:2 limit:5 %} 
-            <article>
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                <p>{{ post.excerpt }}</p>
-            </article>
-            {% endfor %}
-        </div>
-    </main>
+    document.getElementById("blog-post-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(document.getElementById("blog-post-form"));
+      const title = formData.get("title");
+      const subheadings = [];
+      for (let i = 1; i <= document.getElementById("subheadings-list").childElementCount; i++) {
+        subheadings.push({
+          text: formData.get(`subheading-${i}`),
+          image: formData.get(`image-${i}`),
+        });
+      }
+      const intro = formData.get("intro");
+      const conclusion = formData.get("conclusion");
 
-    <aside class="sidebar">
-        <h3>Categories</h3>
-        <ul>
-            {% for category in site.categories %}
-                <li><a href="{{ '/categories/' | append: category[0] | relative_url }}">{{ category[0] }}</a></li>
-            {% endfor %}
-        </ul>
+      // Create a visual story at the top of the blog post
+      const visualStoryContainer = document.getElementById("visual-story-container");
+      visualStoryContainer.innerHTML = "";
+      subheadings.forEach((subheading, index) => {
+        const visualStoryItem = document.createElement("div");
+        visualStoryItem.className = "visual-story-item";
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(subheading.image);
+        img.alt = subheading.text;
+        visualStoryItem.appendChild(img);
+        const h3 = document.createElement("h3");
+        h3.textContent = subheading.text;
+        visualStoryItem.appendChild(h3);
+        visualStoryContainer.appendChild(visualStoryItem);
+      });
 
-        <h3>Tags</h3>
-        <ul>
-            {% for tag in site.tags %}
-                <li><a href="{{ '/tags/' | append: tag[0] | relative_url }}">{{ tag[0] }}</a></li>
-            {% endfor %}
-        </ul>
-    </aside>
-</div>
+      // Use the Ideogram Wrapper to fetch images based on the title and subheadings
+      ideogramWrapper.search(title, (images) => {
+        const imageUrls = images.map((image) => image.url);
+        subheadings.forEach((subheading, index) => {
+          ideogramWrapper.search(subheading.text, (images) => {
+            subheading.image = images[0].url;
+          });
+        });
 
-<footer>
-    <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
-</footer>
+        // Create a new blog post with the form data
+        const blogPost = {
+          title,
+          subheadings,
+          intro,
+          conclusion,
+        };
 
+        // TO DO: Save the blog post to your database or storage
+        console.log(blogPost);
+      });
+    });
+  </script>
+</body>
+</html>
